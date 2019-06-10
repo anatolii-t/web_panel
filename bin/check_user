@@ -1,0 +1,14 @@
+if [ -z $SUDO_USER ]
+then
+  panel_user="root"
+else
+  panel_user=$SUDO_USER
+fi
+
+check_permission_admin=`id $panel_user | grep '10(wheel)' | wc -l`
+if [ "$check_permission_admin" = "1" ]
+then
+  panel_user_inf=$(echo ${panel_user}"(adm)") 
+else
+  panel_user_inf=$(echo ${panel_user})
+fi

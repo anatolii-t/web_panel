@@ -1,0 +1,11 @@
+function logging {
+  showing_flag=$1
+  while read -r text
+  do
+    LOGTIME=`date "+%Y-%m-%d %H:%M:%S"`
+    if [ "$showing_flag" == "show" ]; then
+      echo -e $text
+    fi
+    echo -e [$LOGTIME]":"[$panel_user_inf]":"[$action_perfomed]": "$text >> $panel_log
+  done
+}

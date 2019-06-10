@@ -1,0 +1,15 @@
+<VirtualHost *:8080>
+    ServerName ${site_name}
+    ServerAlias www.${site_name}
+    SetEnvIf X-Forwarded-Proto https HTTPS=on
+    DocumentRoot /var/www/${site_owner}/www/${site_name}
+    AssignUserId ${site_owner} ${site_owner}
+  <Directory /var/www/${site_owner}/www>
+   AllowOverride None
+   Require all granted
+  </Directory>
+ DirectoryIndex index.php
+ Include /etc/httpd/vhosts_php/${site_owner}/${site_name}_php.conf
+ ErrorLog /var/www/${site_owner}/logs/httpd/${site_name}_error.log
+ CustomLog /var/www/${site_owner}/logs/httpd/${site_name}_requests.log combined
+</VirtualHost>

@@ -1,0 +1,4 @@
+panel_main_dir=/usr/local/panel
+panel_src_dir=$panel_main_dir/src
+panel_var_dir=$panel_main_dir/var
+panel_log=$panel_main_dir/log/panel.log

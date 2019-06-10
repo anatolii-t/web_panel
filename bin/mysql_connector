@@ -1,0 +1,10 @@
+function mysql_connector {
+  db_query=$1
+  mysql -D panel_db -u root -Bse "$db_query"
+}
+
+function mysql_connector_full {
+  db_query=$1
+  mysql -D panel_db -u root -e "$db_query"
+}
+
