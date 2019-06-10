@@ -13,7 +13,7 @@ do
   echo -e "\t\t\tACCOUNTS\n" 
  
   sudo /usr/local/panel/bin/admin/list_users.sh
-
+  sudo /usr/local/panel/bin/root/list_adminstrators.sh
 
   echo -e "
   Available function:

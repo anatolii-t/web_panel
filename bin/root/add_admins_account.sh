@@ -10,7 +10,7 @@ trap '' SIGINT
 . /usr/local/panel/bin/mysql_connector
 
 
-if [ $panel_user="root" ]
+if [ "$panel_user" = "root" ]
 then
   if [ -z $1 ]
   then
@@ -96,6 +96,8 @@ then
 
   echo '$HOME/.panel/admin_panel_start.sh' >> /home/admins/$new_admin/.bash_profile
   cp /root/.my.cnf /home/admins/$new_admin/.my.cnf
+
+  chown -R $new_admin: /home/admins/$new_admin/.panel
 
   mysql_connector "INSERT INTO admins VALUES ('${new_admin}')"
   

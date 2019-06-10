@@ -61,6 +61,13 @@ then
   sleep 5
   exit 1
 fi
+if [ -d /etc/httpd/vhosts_php/$added_user_name ]
+then
+  message="ERROR! Apache's  folder '/etc/nginx/vhosts_php/$added_user_name' for user's php conf already exist! Exiting now!"
+  echo "\\t$message" | logging show
+  sleep 5
+  exit 1
+fi
 #Nginx
 if [ -d /etc/nginx/vhosts/$added_user_name ]
 then
@@ -92,7 +99,7 @@ do
   read -p "Enter number of type set password: " choosen_category
   case "$choosen_category" in
     "1" ) new_user_password=`pwgen -cns -N 1 21`
-          (echo $new_user_password;) | /usr/bin/passwd $new_admin --stdin >/dev/null
+          (echo $new_user_password;) | /usr/bin/passwd $added_user_name --stdin >/dev/null
           echo "Setted password: $new_user_password"
           break
           ;;
@@ -129,7 +136,7 @@ do
               continue
             fi
           fi
-          (echo $new_user_password;) | /usr/bin/passwd $new_admin --stdin >/dev/null
+          (echo $new_user_password;) | /usr/bin/passwd $added_user_name --stdin >/dev/null
           break
           ;;
     * ) if [ $wrong_count = "2" ]
@@ -183,6 +190,15 @@ then
   sleep 5
   exit 1
 fi
+mkdir /etc/httpd/vhosts_php/$added_user_name > /dev/null 2>>$panel_log
+if [ "$?" != "0" ]
+then
+  message="ERROR! Can't create Apache's folder for php_confs user '$added_user_name'! Exiting now!"
+  echo "\\t$message" | logging show
+  sleep 5
+  exit 1
+fi
+
 
 
 mkdir /etc/nginx/vhosts/$added_user_name > /dev/null 2>>$panel_log
@@ -278,6 +294,8 @@ fi
 cp -R /usr/local/panel/src/users /var/www/$added_user_name/.panel
 find /var/www/$added_user_name/.panel -name '*sh' -type f -exec chmod 500 {} \;
 
+chown -R $added_user_name: /var/www/$added_user_name
+
 echo '$HOME/.panel/user_panel_start.sh' >> /var/www/$added_user_name/.bash_profile
 
 
@@ -286,7 +304,7 @@ mysql -e "CREATE USER '$added_user_name'@'localhost' IDENTIFIED BY '$mysql_user_
 echo "
 [client]
 user = $added_user_name
-password = $mysql_password
+password = $mysql_user_password
 " > /var/www/$added_user_name/.my.cnf
 
 

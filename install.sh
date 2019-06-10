@@ -163,12 +163,12 @@ fi
 if ! [ -d /home/admins ]
 then
   mkdir /home/admins
-  chmoding_dir /home/admins
+  chmod 755 /home/admins
 else
   echo -e "\tWARNING! Directory for admins already exist, recreating dir..." 
   rm -rf /home/admins
   mkdir /home/admins
-  chmoding_dir /home/admins
+  chmod 755 /home/admins
 fi
 
 #dir for users
@@ -599,7 +599,7 @@ function connect {
 
 #Creating panel DB's tables
 echo "Creating panel DB's tables..." | write_install_log show
-connect "create table users (name VARCHAR(16), PRIMARY KEY (name));"
+connect "create table users (name VARCHAR(16), admin_creator VARCHAR(16), PRIMARY KEY (name));"
 connect "create table admins (name VARCHAR(16), PRIMARY KEY (name));"
 connect "create table sites (name VARCHAR(255), owner VARCHAR(16), php_version VARCHAR(11), ssl_enable ENUM('y', 'n') NOT NULL DEFAULT 'n', backup ENUM('y', 'n') NOT NULL DEFAULT 'n', PRIMARY KEY (name));"
 connect "create table data_bases (name VARCHAR(64), owner VARCHAR(16), users VARCHAR(88), backup ENUM('y', 'n') NOT NULL DEFAULT 'n', PRIMARY KEY (name));"
@@ -628,11 +628,11 @@ echo -e '\\tOK! PHP 5.6 as module Apache installed successfully' | write_install
 if [ ! -f $panel_var_dir/php_versions ]
 then
   touch $panel_var_dir/php_versions
-  chmoding_file $panel_var_dir/php_versions
+  chmod 644 $panel_var_dir/php_versions
 else
  rm -f $panel_var_dir/php_versions
  touch $panel_var_dir/php_versions
- chmoding_file $panel_var_dir/php_versions
+ chmod 644 $panel_var_dir/php_versions
 fi
 echo '5.6(Apache)' > $panel_var_dir/php_versions
 
@@ -1155,6 +1155,8 @@ find /usr/local/panel -name '*sh' -type f -exec chmod 750 {} \;
 
 cp -R /usr/local/panel/src/root /root/.panel
 find /root/.panel -name '*sh' -type f -exec chmod 500 {} \;
+
+chmod 755 /usr/local/panel /usr/local/panel/var
 
 echo '$HOME/.panel/root_panel_start.sh' >> /root/.bash_profile
 

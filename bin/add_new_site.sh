@@ -189,7 +189,7 @@ then
 
   touch /etc/nginx/vhosts/$site_owner/$site_name
   used_template=`cat /usr/local/panel/src/conf_templates/nginx_ssl.template`
-  eval "echo \"$used_template\"" > /etc/nginx/vhosts/$site_owner/$site_name
+  eval "echo \"$used_template\"" > /etc/nginx/vhosts/$site_owner/${site_name}.conf
   nginx -t > /dev/null 2>>$panel_log
   if [ $? = "1" ]
   then
@@ -201,7 +201,7 @@ then
 else
   touch /etc/nginx/vhosts/$site_owner/$site_name
   used_template=`cat /usr/local/panel/src/conf_templates/nginx.template`
-  eval "echo \"$used_template\"" > /etc/nginx/vhosts/$site_owner/$site_name
+  eval "echo \"$used_template\"" > /etc/nginx/vhosts/$site_owner/${site_name}.conf
   nginx -t > /dev/null 2>>$panel_log
   if [ $? = "1" ]
   then
@@ -215,7 +215,7 @@ fi
 #Creating apache conf
 touch /etc/httpd/vhosts/$site_owner/$site_name
   used_template=`cat /usr/local/panel/src/conf_templates/apache.template`
-  eval "echo \"$used_template\"" > /etc/httpd/vhosts/$site_owner/$site_name
+  eval "echo \"$used_template\"" > /etc/httpd/vhosts/$site_owner/${site_name}.conf
   httpd -t > /dev/null 2>>$panel_log
   if [ $? = "1" ]
   then

@@ -41,22 +41,22 @@ do
               read -p "Enter number of needed function: " choosen_function
               case "$choosen_function" in
                 "1" ) sudo systemctl status httpd
-                break
+                break 2
                 ;;
                 "2" ) sudo systemctl stop httpd
-                break
+                break 2
                 ;;
                 "3" ) sudo systemctl restart httpd
-                break
+                break 2
                 ;;
-                "4" ) sudo systemctl start http
-                break    
+                "4" ) sudo systemctl start httpd
+                break 2    
                 ;;
-                "5" ) break;;
+                "5" ) break 2;;
                 * ) if [ $wrong_count = "2" ]
                     then
                       ERROR_MESSAGE='ERROR! You entered wrong argument 3 times. Return to the previous menu'
-                      break
+                      break 2
                     else
                       echo "Wrong argument. Try again." 
                       wrong_count=$[ $wrong_count + 1 ]
@@ -78,22 +78,22 @@ do
               read -p "Enter number of needed function: " choosen_function
               case "$choosen_function" in
                 "1" ) sudo systemctl status nginx
-                break
+                break 2
                 ;;
                 "2" ) sudo systemctl stop nginx
-                break
+                break 2
                 ;;
                 "3" ) sudo systemctl restart nginx
-                break
+                break 2
                 ;;
                 "4" ) sudo systemctl start nginx
-                break
+                break 2
                 ;;
-                "5" ) break;;
+                "5" ) break 2;;
                 * ) if [ $wrong_count = "2" ]
                     then
                       ERROR_MESSAGE='ERROR! You entered wrong argument 3 times. Return to the previous menu'
-                      break
+                      break 2
                     else
                       echo "Wrong argument. Try again." 
                       wrong_count=$[ $wrong_count + 1 ]
@@ -115,22 +115,22 @@ do
               read -p "Enter number of needed function: " choosen_function
               case "$choosen_function" in
                 "1" ) sudo systemctl status proftpd
-                break
+                break 2
                 ;;
                 "2" ) sudo systemctl stop proftpd
-                break
+                break 2
                 ;;
                 "3" ) sudo systemctl restart proftpd
-                break
+                break 2
                 ;;
                 "4" ) sudo systemctl start proftpd
-                break
+                break 2
                 ;;
-                "5" ) break;;
+                "5" ) break 2;;
                 * ) if [ $wrong_count = "2" ]
                     then
                       ERROR_MESSAGE='ERROR! You entered wrong argument 3 times. Return to the previous menu'
-                      break
+                      break 2
                     else
                       echo "Wrong argument. Try again." 
                       wrong_count=$[ $wrong_count + 1 ]
@@ -152,22 +152,22 @@ do
               read -p "Enter number of needed function: " choosen_function
               case "$choosen_function" in
                 "1" ) sudo systemctl status mariadb
-                break
+                break 2
                 ;;
                 "2" ) sudo systemctl stop mariadb
-                break
+                break 2
                 ;;
                 "3" ) sudo systemctl restart mariadb
-                break
+                break 2
                 ;;
                 "4" ) sudo systemctl start mariadb
-                break
+                break 2
                 ;;
-                "5" ) break;;
+                "5" ) break 2;;
                 * ) if [ $wrong_count = "2" ]
                     then
                       ERROR_MESSAGE='ERROR! You entered wrong argument 3 times. Return to the previous menu'
-                      break
+                      break 2
                     else
                       echo "Wrong argument. Try again." 
                       wrong_count=$[ $wrong_count + 1 ]
@@ -180,7 +180,7 @@ do
       * ) if [ $wrong_count = "2" ]
           then
             ERROR_MESSAGE='ERROR! You entered wrong argument 3 times. Return to the previous menu'
-            break
+            break 
           else
             echo "Wrong argument. Try again." 
             wrong_count=$[ $wrong_count + 1 ]

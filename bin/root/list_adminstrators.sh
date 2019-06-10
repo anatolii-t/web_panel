@@ -5,7 +5,7 @@
 . /usr/local/panel/bin/mysql_connector
 . /usr/local/panel/bin/check_user
 
-if [ $panel_user="root" ]
+if [ "$panel_user" = "root" ]
 then
   echo -e "\t\t\tList all admins"
   if [ `mysql_connector_full "SELECT * FROM admins" | wc -l` = "0" ]

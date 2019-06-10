@@ -26,10 +26,10 @@ do
   do
     read -p "Enter number of needed category: " choosen_category
     case "$choosen_category" in
-      "1" ) exec $HOME/.panel/www/user_www_category.sh;;
-      "2" ) exec $HOME/.panel/db/user_db_category.sh;;
-      "3" ) exec $HOME/.panel/ftp/user_ftp_category.sh;;
-      "4" ) exec $HOME/.panel/account/user_settings_category.sh;;
+      "1" ) exec $HOME/.panel/www/user_wwws_category.sh;;
+      "2" ) exec $HOME/.panel/db/user_dbs_category.sh;;
+      "3" ) exec $HOME/.panel/ftp/user_ftps_category.sh;;
+      "4" ) exec $HOME/.panel/account/user_accounts_category.sh;;
       "5" ) exit ;;
       * ) if [ $wrong_count = "2" ]
           then

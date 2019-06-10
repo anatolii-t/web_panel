@@ -9,7 +9,7 @@ trap '' SIGINT
 . /usr/local/panel/bin/logging
 . /usr/local/panel/bin/mysql_connector
 
-if [ $panel_user="root" ]
+if [ "$panel_user" = "root" ]
 then
   if [ -z $1]
   then
