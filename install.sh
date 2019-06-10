@@ -1150,9 +1150,7 @@ mv /srv/web_panel/bin /usr/local/panel/bin
 mv /srv/web_panel/src /usr/local/panel/src
 mv /srv/web_panel/var/panel_variables /usr/local/panel/var/panel_variables 
 
-find /usr/local/panel -name '*sh' -type f -exec chmod 400 {} \;
-
-chmod 750 /usr/local/panel/bin/user/delete_account_myself.sh /usr/local/panel/bin/list_db.sh /usr/local/panel/bin/list_db_users.sh /usr/local/panel/bin/add_new_db.sh /usr/local/panel/bin/delete_db_user.sh /usr/local/panel/bin/add_user_in_db.sh /usr/local/panel/bin/delete_db.sh /usr/local/panel/bin/delete_user_from_db.sh /usr/local/panel/bin/add_new_db_user.sh /usr/local/panel/bin/add_new_ftp_user.sh /usr/local/panel/bin/delete_ftp_user.sh /usr/local/panel/bin/list_ftp_users.sh /usr/local/panel/bin/panel_header.sh /usr/local/panel/bin/list_www_properties.sh /usr/local/panel/bin/change_php_version.sh /usr/local/panel/bin/ssl_for_site.sh /usr/local/panel/bin/backup_for_site.sh /usr/local/panel/bin/list_www.sh /usr/local/panel/bin/delete_site.sh /usr/local/panel/bin/add_new_site.sh
+find /usr/local/panel -name '*sh' -type f -exec chmod 750 {} \;
 
 
 cp -R /usr/local/panel/src/root /root/.panel
