@@ -8,12 +8,8 @@ panel_main_dir=/usr/local/panel
 panel_log_dir=$panel_main_dir/log
 install_log=$panel_log_dir/install.log
 panel_log=$panel_log_dir/panel.log
-#src - for confs tenmplates
 #var - for panel's files
-#bin - for panl's scripts
-panel_src_dir=$panel_main_dir/src
 panel_var_dir=$panel_main_dir/var
-panel_bin_dir=$panel_main_dir/bin
 installation_date=`date "+%Y-%m-%d"`
 #--------VARIABLES END--------#
 
@@ -87,19 +83,7 @@ fi
 #Check and create additionl dirs for panel
 #src - for confs tenmplates
 #var - for panel's files
-#bin - for panl's scripts
-
 #Check and create panel src dir
-if ! [ -d $panel_src_dir ]
-then
-  mkdir $panel_src_dir
-  chmoding_dir $panel_src_dir
-else
-  echo -e "\tWARNING! Panel src dir \"$panel_src_dir\" already exist, recreating dir..."
-  rm -rf $panel_src_dir
-  mkdir $panel_src_dir
-  chmoding_dir $panel_src_dir
-fi
 
 #Check and create panel var dir
 if ! [ -d $panel_var_dir ]
@@ -113,28 +97,16 @@ else
   chmoding_dir $panel_var_dir
 fi
 
-#Check and create panel bin dir
-if ! [ -d $panel_bin_dir ]
-then
-  mkdir $panel_bin_dir
-  chmoding_dir $panel_bin_dir
-else
-  echo -e "\tWARNING! Panel bin dir \"$panel_bin_dir\" already exist, recreating dir..."
-  rm -rf $panel_bin_dir
-  mkdir $panel_bin_dir
-  chmoding_dir $panel_bin_dir
-fi
-
 #Check and create panel log file
 if ! [ -f $panel_log ]
 then
   touch $panel_log
-  chmoding_file $panel_bin_dir
+  chmoding_file $panel_log
 else
   echo -e "\tWARNING! Panel log dir \"$panel_log\" already exist, recreating dir..."
   rm -rf $panel_log
   touch $panel_log
-  chmoding_file $panel_bin_dir
+  chmoding_file $panel_log
 fi
 
 
@@ -527,7 +499,7 @@ fi
 
 #Install system programms
 echo "Install system programms" | write_install_log
-yum -y install zip unzip pwgen rsync psmisc > /dev/null 2>>$install_log
+yum -y install zip unzip pwgen rsync psmisc git > /dev/null 2>>$install_log
 echo "System programms installed" | write_install_log
 
 #Configuring MySQL server
@@ -1172,6 +1144,21 @@ then
 fi
 groupadd -r panel_users
 
+cd /srv
+git clone https://github.com/velgi/web_panel.git
+mv /srv/web_panel/bin /usr/local/panel/bin
+mv /srv/web_panel/src /usr/local/panel/src
+mv /srv/web_panel/var/panel_variables /usr/local/panel/var/panel_variables 
+
+find /usr/local/panel -name '*sh' -type f -exec chmod 400 {} \;
+
+chmod 750 /usr/local/panel/bin/user/delete_account_myself.sh /usr/local/panel/bin/list_db.sh /usr/local/panel/bin/list_db_users.sh /usr/local/panel/bin/add_new_db.sh /usr/local/panel/bin/delete_db_user.sh /usr/local/panel/bin/add_user_in_db.sh /usr/local/panel/bin/delete_db.sh /usr/local/panel/bin/delete_user_from_db.sh /usr/local/panel/bin/add_new_db_user.sh /usr/local/panel/bin/add_new_ftp_user.sh /usr/local/panel/bin/delete_ftp_user.sh /usr/local/panel/bin/list_ftp_users.sh /usr/local/panel/bin/panel_header.sh /usr/local/panel/bin/list_www_properties.sh /usr/local/panel/bin/change_php_version.sh /usr/local/panel/bin/ssl_for_site.sh /usr/local/panel/bin/backup_for_site.sh /usr/local/panel/bin/list_www.sh /usr/local/panel/bin/delete_site.sh /usr/local/panel/bin/add_new_site.sh
+
+
+cp -R /usr/local/panel/src/root /root/.panel
+find /root/.panel -name '*sh' -type f -exec chmod 500 {} \;
+
+echo '$HOME/.panel/root_panel_start.sh' >> /root/.bash_profile
 
 #Modification sudoers
 if [ -f /etc/sudoers ]

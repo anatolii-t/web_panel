@@ -90,7 +90,10 @@ then
 
   
   #copyying panel file and create .bash_profile
-  cp /usr/local/panel/src/admins /home/admins/$new_admin/.panel
+  cp -R /usr/local/panel/src/admins /home/admins/$new_admin/.panel
+
+  find /home/admins/$new_admin/.panel -name '*sh' -type f -exec chmod 500 {} \;  
+
   echo '$HOME/.panel/admin_panel_start.sh' >> /home/admins/$new_admin/.bash_profile
   cp /root/.my.cnf /home/admins/$new_admin/.my.cnf
 

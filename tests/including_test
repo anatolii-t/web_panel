@@ -1,5 +1,0 @@
-echo $panel_main_dir
-echo $install_log
-echo $panel_log_dir
-echo $panel_log
-

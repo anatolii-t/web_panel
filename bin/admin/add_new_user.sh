@@ -275,7 +275,9 @@ then
 fi
 
 #Copying scripts----------
-cp /usr/local/panel/src/users /var/www/$added_user_name/.panel
+cp -R /usr/local/panel/src/users /var/www/$added_user_name/.panel
+find /var/www/$added_user_name/.panel -name '*sh' -type f -exec chmod 500 {} \;
+
 echo '$HOME/.panel/user_panel_start.sh' >> /var/www/$added_user_name/.bash_profile
 
 
