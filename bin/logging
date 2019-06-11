@@ -1,3 +1,5 @@
+#/bin/bash
+
 function logging {
   showing_flag=$1
   while read -r text
