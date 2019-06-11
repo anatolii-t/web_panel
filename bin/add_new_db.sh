@@ -33,7 +33,7 @@ echo "\\t$start_message" | logging
 
 #Checking existing DB in panel
 datbase_in_panel_is_exist=`mysql_connector "SELECT * FROM data_bases WHERE name='$added_db_name'" | wc -l`
-if [ $database_in_panel_is_exist -gt 0 ]
+if [ "$database_in_panel_is_exist" -gt "0" ]
 then
   message="ERROR! DB '$added_db_name' already added in panel! Exiting now!"
   echo "\\t$message" | logging show
@@ -43,7 +43,7 @@ fi
 
 #Checking existing DB in system
 database_in_system_is_exist=`mysql -Bse "show databases;" | grep ^${added_db_name}$ | wc -l`
-if [ $database_in_system_is_exist -gt 0 ]
+if [ "$database_in_system_is_exist" -gt "0" ]
 then
   message="ERROR! DB '$added_db_name' already added in system! Exiting now!"
   echo "\\t$message" | logging show

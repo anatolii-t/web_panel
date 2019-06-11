@@ -216,14 +216,6 @@ fi
 touch /etc/httpd/vhosts/$site_owner/$site_name
   used_template=`cat /usr/local/panel/src/conf_templates/apache.template`
   eval "echo \"$used_template\"" > /etc/httpd/vhosts/$site_owner/${site_name}.conf
-  httpd -t > /dev/null 2>>$panel_log
-  if [ $? = "1" ]
-  then
-    error_message="ERROR! Created conf does not valid. Check conf!"
-    echo "\\t$error_message" | logging show
-  else
-    systemctl reload httpd > /dev/null 2>>$panel_log
-  fi
 #Creating php_version file
 case "$php_version" in
   "5.6(Apache)") echo "" > /etc/httpd/vhosts_php/${site_owner}/${site_name}_php.conf;;
