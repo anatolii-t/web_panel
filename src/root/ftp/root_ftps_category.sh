@@ -31,7 +31,7 @@ do
     case "$choosen_function" in
       "1" ) exec $HOME/.panel/ftp/root_add_ftp.sh;;
       "2" ) exec $HOME/.panel/ftp/root_delete_ftp.sh;;
-      "6" ) exec $HOME/.panel/root_panel_start.sh;;
+      "3" ) exec $HOME/.panel/root_panel_start.sh;;
       * ) if [ $wrong_count = "2" ]
           then
             ERROR_MESSAGE='ERROR! You entered wrong argument 3 times. Return to the previous menu'

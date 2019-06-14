@@ -103,5 +103,5 @@ do
 done
 
 
-sudo /usr/local/panel/bin/add_new_db.sh $entered_name_new_db $backup_new_db
+sudo /usr/local/panel/bin/add_new_db.sh $entered_name_new_db $backup_new_db $entered_owner_new_db
 exec $HOME/.panel/db/user_dbs_category.sh
