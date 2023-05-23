@@ -1,38 +1,37 @@
 # Web panel
-Консольная панель управления веб-сервером.
+CLI web-server management panel
 
 ## About Web panel
 
-Web panel - это личный проект, созданный для реализации дипломного проекта бакалавра.
-Написана на Bash.
-Основные сервисы - Apache, Nginx. MySQL, ProFTPD.
-Для хранения служебной информации используется БД MySQL.
-
+Web panel - is a personal project, mainly created for studying.
+Written using Bash.
+Main services available for customers - Apache, Nginx, MySQL, ProFTPD.
+For saving system information i was using MySQL.
 
 ## Requirements
 
   + CentOS 7
-  + Доступ root по ssh
+  + root access over ssh
 
 ## Installing
 
 `$ wget https://raw.githubusercontent.com/velgi/web_panel/master/install.sh`  
 `$ /bin/bash install.sh`  
 
-## Functional
+## Functionality
 
-  + Поддерживает все базовые функции для организации работы веб-сервера, такие как: создание/редактирование/удаление пользователя, FTP-пользователя, сайта, БД, установка SSL-сертификатов (существующего или генерация самоподписанного)
-  + Разделение на 3 уровня доступа 
+  + Support all basic functions for managing web-server and even somehow treating it as shared machine. Main functions are - creating/changing/deleting user, FTP-user, sites, DBs, installing SSL-certificates (existing or generation self-signed)
+  + Separation on 3 access layers: 
     + user
-    + admin (получает возможность управлять своими пользователями)
-    + root (получает возможность управлять всеми пользователями всех администраторов и администраторами)
-  + Поддержка нескольких версий PHP (в режиме CGI)
-  + Логгирование панели (в /usr/local/panel/log)
+    + admin (can manage own users and theit content)
+    + root (can manage all users and admins and their content)
+  + Supporting multiplie PHP versions (CGI mode)
+  + Loggin panel actions (in /usr/local/panel/log)
     
 ## Detail
 
-  + Безопасность самой панели, хоть и сравнительно слабая, реализуется при помощи sudoers, тщательно подобраных прав на исполнаемые файлы и написания куска кода, выполняющего проверку пользователя (в файле bin/check_user) ;
-  + Увы, часть функций так и не была протестированна (однако, уверен, что 80% работает) ;
-  + Часть функций, таких как установка SSL Lets Encrypt и настройка автоматического бэкапирования так и не была реализована, хоть и планировалась;
-  + К сожалению, общая безопасность сервера также не подвергалась дополнительной настроке, скорее даже наоборот (например, остановлен IPtables)
+  + Security of the panel itself might be not greatest, but developed using sudoers, correctly picked permissions for scripts and writing additional code, which is checking user and affect their permissions (file bin/check_user) ;
+  + Unfortunatelly, some of the tools weren't tested ;
+  + Some functions, like installing SSL Lets Encrypt or creating auto backup system wasn't implemented, even if was planned in the first place;
+  + Unfortunatelly, general server security wasn't additionaly tweaked and chacked, even in opposite - for example IPtables is stopped
   
